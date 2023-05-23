@@ -2,29 +2,25 @@ package com.altbank.data;
 
 import lombok.Getter;
 
-import java.util.Set;
-
-import static java.util.Set.of;
-
 public enum Rank {
-    TWO(of(2)),
-    THREE(of(3)),
-    FOUR(of(4)),
-    FIVE(of(5)),
-    SIX(of(6)),
-    SEVEN(of(7)),
-    EIGHT(of(8)),
-    NINE(of(9)),
-    TEN(of(10)),
-    JACK(of(11)),
-    QUEEN(of(11)),
-    KING(of(11)),
-    ACE(of(1, 10));
+    TWO(2),
+    THREE(3),
+    FOUR(4),
+    FIVE(5),
+    SIX(6),
+    SEVEN(7),
+    EIGHT(8),
+    NINE(9),
+    TEN(10),
+    JACK(11),
+    QUEEN(11),
+    KING(11),
+    ACE(10);
 
     @Getter
-    private final Set<Integer> points;
+    private final int points;
 
-    Rank(Set<Integer> points) {
+    Rank(int points) {
         this.points = points;
     }
 }
