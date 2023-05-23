@@ -82,10 +82,24 @@ class DealerImplTest {
     @Test
     @DisplayName("Should return a shuffled deck with the same number of cards")
     void shuffleCardsReturnsShuffledDeckWithSameNumberOfCards() {
-        Deck deck = new Deck();
-        Deck shuffledDeck = dealer.shuffleCards(deck);
+        List<Card> cards = new ArrayList<>();
+        cards.add(new Card(ACE, CLUBS));
+        cards.add(new Card(TWO, CLUBS));
+        cards.add(new Card(THREE, CLUBS));
+        cards.add(new Card(FOUR, CLUBS));
+        cards.add(new Card(FIVE, CLUBS));
+        cards.add(new Card(SIX, CLUBS));
+        cards.add(new Card(SEVEN, CLUBS));
+        cards.add(new Card(EIGHT, CLUBS));
+        cards.add(new Card(NINE, CLUBS));
+        cards.add(new Card(TEN, CLUBS));
+        cards.add(new Card(JACK, CLUBS));
+        cards.add(new Card(QUEEN, CLUBS));
+        cards.add(new Card(KING, CLUBS));
+        Deck deckWithKnownOrder = new Deck(cards);
+        Deck shuffledDeck = dealer.shuffleCards(deckWithKnownOrder);
 
-        assertEquals(deck.getCards().size(), shuffledDeck.getCards().size());
+        assertEquals(deckWithKnownOrder.getCards().size(), shuffledDeck.getCards().size());
     }
 
     @Test
