@@ -14,7 +14,7 @@ import static com.altbank.data.Rank.ACE;
 @ApplicationScoped
 public class GameImpl implements Game {
 
-    private static final int MAX_SCORE = 21;
+    private static final int WIN_SCORE = 21;
     private static final int ACE_DIFF_VALUE = 9;
 
     @Override
@@ -32,11 +32,21 @@ public class GameImpl implements Game {
     public int countScore(List<Card> hand) {
         int score = handScore(hand);
 
-        if (score > MAX_SCORE) {
+        if (score > WIN_SCORE) {
             int numOfAces = countAces(hand);
             return reachMaxAceScore(score, numOfAces);
         }
         return score;
+    }
+
+    @Override
+    public boolean checkWin(List<Card> hand) {
+        return countScore(hand) == WIN_SCORE;
+    }
+
+    @Override
+    public boolean checkLose(List<Card> hand) {
+        return countScore(hand) > WIN_SCORE;
     }
 
     private int handScore(List<Card> hand) {
@@ -50,7 +60,7 @@ public class GameImpl implements Game {
 
         for (int i = 0; i < numOfAces; i++) {
             aceScore -= ACE_DIFF_VALUE;
-            if (score <= MAX_SCORE) return score;
+            if (score <= WIN_SCORE) return score;
         }
 
         return aceScore;

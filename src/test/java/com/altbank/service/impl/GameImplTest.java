@@ -12,8 +12,7 @@ import java.util.*;
 
 import static com.altbank.data.Rank.*;
 import static com.altbank.data.Suit.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("GameImpl")
 class GameImplTest {
@@ -23,6 +22,69 @@ class GameImplTest {
     @BeforeEach
     void setUp() {
         game = new GameImpl();
+    }
+
+    @Test
+    @DisplayName("Should return true when the hand score is greater than 21")
+    void checkLoseWhenHandScoreIsGreaterThan21() {
+        List<Card> hand = new ArrayList<>();
+        hand.add(new Card(TEN, HEARTS));
+        hand.add(new Card(TEN, SPADES));
+        hand.add(new Card(TWO, CLUBS));
+
+        boolean result = game.checkLose(hand);
+
+        assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Should return false when the hand score is equal to 21")
+    void checkLoseWhenHandScoreIsEqualTo21() {
+        List<Card> hand = new ArrayList<>();
+        hand.add(new Card(JACK, SPADES));
+        hand.add(new Card(ACE, SPADES));
+
+        boolean result = game.checkLose(hand);
+
+        assertFalse(result);
+    }
+
+    @Test
+    @DisplayName("Should return false when the hand score is less than 21")
+    void checkLoseWhenHandScoreIsLessThan21() {
+        List<Card> hand = new ArrayList<>();
+        hand.add(new Card(TWO, HEARTS));
+        hand.add(new Card(THREE, SPADES));
+        hand.add(new Card(FIVE, CLUBS));
+
+        boolean result = game.checkLose(hand);
+
+        assertFalse(result);
+    }
+
+    @Test
+    @DisplayName("Should return true when the hand score is exactly 21")
+    void checkWinWhenHandScoreIs21() {
+        List<Card> hand = new ArrayList<>();
+        hand.add(new Card(ACE, HEARTS));
+        hand.add(new Card(JACK, SPADES));
+
+        boolean result = game.checkWin(hand);
+
+        assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Should return false when the hand score is greater than 21")
+    void checkWinWhenHandScoreIsGreaterThan21() {
+        List<Card> hand = new ArrayList<>();
+        hand.add(new Card(TEN, HEARTS));
+        hand.add(new Card(TEN, SPADES));
+        hand.add(new Card(TWO, CLUBS));
+
+        boolean result = game.checkWin(hand);
+
+        assertFalse(result);
     }
 
     @Test
